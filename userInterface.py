@@ -1,4 +1,8 @@
-debug = False
+import time
+
+
+animatePuzzle = True
+debug = True
 
 
 def printDebug(message):
@@ -8,7 +12,7 @@ def printDebug(message):
 
 def displayPuzzle(data):
     # Print Top Line
-    print("")
+    print("\n")
     print("+", end="")
     for i in range(9):
         print("---+", end="")
@@ -35,3 +39,9 @@ def displayPuzzle(data):
                 print("---+", end="")
         print("")
     print("\n")
+
+
+def puzzleDisplayStep(data):
+    if animatePuzzle:
+        displayPuzzle(data)
+        time.sleep(.1)

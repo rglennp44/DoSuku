@@ -1,4 +1,4 @@
-from calculate import checkSolved, findBoxNeeds, findColNeeds, findRowNeeds, findCellOptions, findSingleOptions, updateData, updateNeeds, whichBox
+from calculate import checkSolved, findNeeds, findCellOptions, resolveChanges, whichBox
 from puzzlein import testPuzzle
 from userInterface import displayPuzzle, printDebug
 
@@ -7,36 +7,16 @@ data = testPuzzle()
 print("\nInitial Puzzle: \n")
 displayPuzzle(data)
 
-# Declare Needs Arrays
-rowNeeds = []
-colNeeds = []
-boxNeeds = []
-cellOptions = [None] * 81
-changeBuffer = []
+# Generate Needs Array for Puzzle
+printDebug("Calling findNeeds(data)")
+needs = findNeeds(data)
 
-# Populate Needs Arrays
-for row in range(9):
-    rowNeeds.append(findRowNeeds(data, row))
-for col in range(9):
-    colNeeds.append(findColNeeds(data, col))
-for box in range(9):
-    boxNeeds.append(findBoxNeeds(data, box))
+# Build Change Array and Cell Options from Needs Data
+printDebug("Calling findCellOptions(data, needs)")
+[options, changes] = findCellOptions(data, needs)
 
-solved = False
-while(not solved):
-    # Find Possible solutions for each cell
-    [cellOptions, changeBuffer] = findSingleOptions(
-        data, rowNeeds, colNeeds, boxNeeds, cellOptions)
+# Resolve outstanding changes while adding new changes from puzzle as they are generated
+printDebug("Calling resolveChanges(data, changes, options)")
+[data, options] = resolveChanges(data, changes, options)
 
-    # Update Data Array
-    data = updateData(data, changeBuffer)
-
-    # Update Needs Array
-    [rowNeeds, colNeeds, boxNeeds] = updateNeeds(
-        changeBuffer, rowNeeds, colNeeds, boxNeeds)
-
-    # Display Puzzle
-    displayPuzzle(data)
-
-    # Check if Puzzle is Solved
-    solved = checkSolved(data)
+checkSolved(data)
