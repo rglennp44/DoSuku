@@ -13,10 +13,10 @@ needs = findNeeds(data)
 
 # Build Change Array and Cell Options from Needs Data
 printDebug("Calling findCellOptions(data, needs)")
-[options, changes] = findCellOptions(data, needs)
+options, changes = findCellOptions(data, needs)
 
 # Resolve outstanding changes while adding new changes from puzzle as they are generated
 printDebug("Calling resolveChanges(data, changes, options)")
-[data, options] = resolveChanges(data, changes, options)
+data, options = resolveChanges(data, changes, options)
 
 checkSolved(data)

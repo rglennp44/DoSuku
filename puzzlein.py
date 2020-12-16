@@ -1,4 +1,6 @@
 def testPuzzle():
+
+    # Array of Rows
     # data = [
     #     [5, 3, None, None, 7, None, None, None, None],
     #     [6, None, None, 1, 9, 5, None, None, None],
