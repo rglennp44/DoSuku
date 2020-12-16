@@ -85,7 +85,7 @@ def updateNeeds(changeBuffer, rowNeeds, colNeeds, boxNeeds):
 def findNeeds(data):
     printDebug("Call Received by findNeeds()\n")
     # Declare Needs Array
-    needs = [[[1, 2, 3, 4, 5, 6, 7, 8, 9]
+    needs = [[list(range(1, 10))
               for x in range(9)] for y in range(3)]
 
     # Find Row Needs
